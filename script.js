@@ -118,9 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter(Boolean);
 
   const railLinks = Array.from(document.querySelectorAll('.trace-rail a'));
+  const traceFill = document.getElementById('traceFill');
 
   function setActive(id){
     railLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
+    const idx = sections.findIndex(s => s.id === id);
+    if (traceFill && idx > -1){
+      const pct = railLinks.length > 1 ? (idx / (railLinks.length - 1)) * 100 : 0;
+      traceFill.style.height = pct + '%';
+    }
   }
 
   // Highlight the active section as it crosses the viewport midpoint
@@ -131,17 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
   sections.forEach(s => sectionObserver.observe(s));
-
-  // Trace rail scroll progress fill
-  const traceFill = document.getElementById('traceFill');
-  function updateTraceFill(){
-    if (!traceFill) return;
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
-    traceFill.style.height = pct + '%';
-  }
-  window.addEventListener('scroll', updateTraceFill, { passive: true });
-  updateTraceFill();
 
   // Initial state
   setActive('hero');
