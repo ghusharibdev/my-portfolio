@@ -225,7 +225,7 @@ body{
   z-index: 29;
 }
 @media (min-width: 760px){ .mobile-menu{ display: none; } }
-.mobile-menu.is-open{ max-height: 320px; }
+.mobile-menu.is-open{ max-height: 400px; }
 .mobile-menu a{
   padding: 16px var(--edge);
   font-size: 15px;
