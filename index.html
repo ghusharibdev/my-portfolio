@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghusharib Najam — Software Developer</title>
+<meta name="description" content="Ghusharib Najam — Software Developer building with Flutter, Spring Boot, RAG pipelines and the MERN stack. Based in Lahore, Pakistan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Trace rail: vertical schematic line tracking scroll position, doubles as section nav -->
+<nav class="trace-rail" aria-label="Section navigation">
+  <svg class="trace-line" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="1" y1="0" x2="1" y2="100" />
+  </svg>
+  <div class="trace-pulse" id="tracePulse" aria-hidden="true"></div>
+  <ul>
+    <li><a href="#hero" data-section="hero"><span class="node"></span><span class="rail-label">start</span></a></li>
+    <li><a href="#about" data-section="about"><span class="node"></span><span class="rail-label">about</span></a></li>
+    <li><a href="#skills" data-section="skills"><span class="node"></span><span class="rail-label">skills</span></a></li>
+    <li><a href="#experience" data-section="experience"><span class="node"></span><span class="rail-label">path</span></a></li>
+    <li><a href="#work" data-section="work"><span class="node"></span><span class="rail-label">work</span></a></li>
+    <li><a href="#contact" data-section="contact"><span class="node"></span><span class="rail-label">connect</span></a></li>
+  </ul>
+</nav>
+
+<header class="topbar">
+  <a href="#hero" class="mark">{ GN }</a>
+  <nav class="topnav" aria-label="Primary">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="topbar-cta" href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
+  <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">// SOFTWARE DEVELOPER — LAHORE, PK</p>
+      <h1 class="hero-title">Ghusharib<br>Najam</h1>
+      <p class="hero-sub">I build mobile apps, backend APIs, and RAG pipelines that ship —
+        <span class="hl">Flutter</span>, <span class="hl">Spring Boot</span>, <span class="hl">RAG</span> and the
+        <span class="hl">MERN</span> stack, end to end.</p>
+
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">View work</a>
+        <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <p class="section-eyebrow">// ABOUT</p>
+    <div class="about-grid">
+      <p class="about-lede">
+        I'm a computer science student at COMSATS University Islamabad Lahore campus, currently working as a
+        Mobile Application Developer intern at FusionWave. I split my time between shipping
+        production Flutter apps and building backend systems in Spring Boot and Node.js —
+        lately, mostly retrieval-augmented AI tools.
+      </p>
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-label">Currently</span>
+          <span class="fact-value">Mobile App Developer Intern, FusionWave (pvt.) Limited</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Studying</span>
+          <span class="fact-value">B.S. Computer Science, COMSATS University Islamabad, Lahore Campus</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Based in</span>
+          <span class="fact-value">Lahore, Punjab, Pakistan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills">
+    <p class="section-eyebrow">// SKILLS</p>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <h3>Mobile</h3>
+        <ul class="chips">
+          <li>Flutter</li><li>Dart</li><li>MVVM</li><li>Material 3</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <ul class="chips">
+          <li>React.js</li><li>JavaScript</li><li>EJS</li><li>Responsive UI</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <ul class="chips">
+          <li>Node.js</li><li>Express.js</li><li>Spring Boot</li><li>Java</li><li>Spring Security</li><li>JWT Auth</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>AI &amp; RAG</h3>
+        <ul class="chips">
+          <li>LangChain.js</li><li>Qdrant</li><li>Groq</li><li>HuggingFace Transformers</li><li>Semantic Search</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Data &amp; Infra</h3>
+        <ul class="chips">
+          <li>Firebase</li><li>Supabase</li><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li>
+        </ul>
+      </div>
+
+      <div class="skill-group">
+        <h3>Practices</h3>
+        <ul class="chips">
+          <li>REST APIs</li><li>GraphQL</li><li>CI/CD</li><li>Jest</li><li>Clean MVC</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / PATH -->
+  <section id="experience" class="experience">
+    <p class="section-eyebrow">// PATH</p>
+
+    <div class="path-group">
+      <h3 class="path-heading">Experience</h3>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-date"><span class="mono">2026 —</span> Present</div>
+          <div class="tl-body">
+            <h4>Mobile Application Developer <span class="tl-org">· FusionWave (pvt.) Limited</span></h4>
+            <p>Internship, on-site in Lahore. Working across mobile application development and
+              front-end development.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="path-group">
+      <h3 class="path-heading">Certifications</h3>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-date"><span class="mono">2026</span></div>
+          <div class="tl-body">
+            <h4>React Foundations <span class="tl-org">· Pearson / LinkedIn Learning</span></h4>
+            <p>Certification covering React.js fundamentals and front-end development.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-date"><span class="mono">2025</span></div>
+          <div class="tl-body">
+            <h4>Complete NodeJS Developer <span class="tl-org">· Udemy</span></h4>
+            <p>46.5-hour course covering Express.js, MongoDB &amp; SQL, GraphQL, Node internals,
+              Jest testing, CI/CD, and Passport.js authentication.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="path-group">
+      <h3 class="path-heading">Education</h3>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-date"><span class="mono">2023 — 2027</span></div>
+          <div class="tl-body">
+            <h4>B.S. Computer Science <span class="tl-org">· COMSATS University Islamabad, Lahore Campus</span></h4>
+            <p>Bachelor's degree, 7th semester.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-date"><span class="mono">2021 — 2023</span></div>
+          <div class="tl-body">
+            <h4>Pre-Engineering <span class="tl-org">· Punjab Group of Colleges</span></h4>
+            <p>Intermediate.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="work">
+    <p class="section-eyebrow">// WORK</p>
+
+    <div class="work-featured">
+
+      <article class="feature-card">
+        <div class="feature-tag">flagship · AI / RAG</div>
+        <h3>CareerLens</h3>
+        <div class="flow" data-flow="careerlens" aria-hidden="true"></div>
+        <p>An AI-powered job application tracker. Upload a résumé once, paste any job
+          description, and get a match score, skill-gap analysis, interview talking points and
+          likely interview questions — all grounded in the résumé via semantic search, plus a
+          chat interface to ask about it directly.</p>
+        <ul class="tag-row">
+          <li>Flutter (MVVM)</li><li>Node.js</li><li>LangChain.js</li><li>Qdrant</li><li>Groq</li><li>Firebase</li><li>Supabase</li><li>Redis</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/careerlens" target="_blank" rel="noopener" class="feature-link">View on GitHub ↗</a>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-tag">shipped · Play Store</div>
+        <h3>SubsEntry</h3>
+        <div class="flow" data-flow="subsentry" aria-hidden="true"></div>
+        <p>A subscription manager for tracking recurring payments, renewal dates and monthly
+          spend across streaming, AI tools and cloud services — with a spending dashboard,
+          a Subscription Value Index, budget tracking, price history and multi-currency
+          support.</p>
+        <ul class="tag-row">
+          <li>Flutter</li><li>Firebase</li><li>Material 3</li><li>Charts &amp; analytics</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=com.app.subsentry&pcampaignid=web_share" class="feature-link">Live on Google Play ↗</a>
+      </article>
+
+    </div>
+
+    <div class="work-grid">
+
+      <article class="work-card">
+        <h4>MediQueue API</h4>
+        <div class="flow flow--small" data-flow="mediqueue" aria-hidden="true"></div>
+        <p>Secure clinic appointment &amp; queue management backend with doctor profiles,
+          availability slots, daily queue generation and role-based auth.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>JWT</li><li>PostgreSQL</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/MediQueue-API" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>SpendWise API</h4>
+        <div class="flow flow--small" data-flow="spendwise" aria-hidden="true"></div>
+        <p>Personal finance REST API for income, expenses, categories, budgets and monthly
+          summaries, with JWT-protected routes and clean MVC architecture.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Java</li><li>Spring Boot</li><li>Spring Security</li><li>PostgreSQL</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/SpendWise-API" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>Job Board Platform</h4>
+        <div class="flow flow--small" data-flow="jobboard" aria-hidden="true"></div>
+        <p>Connects job seekers with employers — company profiles, job postings, applicant
+          profiles with résumé uploads, and email notifications on status changes.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Node.js</li><li>Express.js</li><li>MongoDB</li><li>Auth</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/Job-Board-Platform" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>Travel Destination Planner</h4>
+        <div class="flow flow--small" data-flow="travel" aria-hidden="true"></div>
+        <p>Explore destinations worldwide with real-time weather, hourly and 7-day forecasts,
+          sunrise/sunset times, and saved favorite trips.</p>
+        <ul class="tag-row tag-row--small">
+          <li>React</li><li>Open-Meteo API</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/Travel-Destination-Planner" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>Ecommerce App</h4>
+        <div class="flow flow--small" data-flow="ecommerce" aria-hidden="true"></div>
+        <p>A Flutter storefront app with Firebase behind it, covering the core shopping flow
+          end to end.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Flutter</li><li>Firebase</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>Weather App</h4>
+        <div class="flow flow--small" data-flow="weather" aria-hidden="true"></div>
+        <p>A Flutter weather app built on the OpenWeatherMap API.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Flutter</li><li>OpenWeatherMap</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+      <article class="work-card">
+        <h4>URL Shortener</h4>
+        <div class="flow flow--small" data-flow="urlshortener" aria-hidden="true"></div>
+        <p>A URL shortener with a simple EJS front end, built on Express and MongoDB.</p>
+        <ul class="tag-row tag-row--small">
+          <li>Express.js</li><li>MongoDB</li><li>EJS</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <p class="section-eyebrow">// CONNECT</p>
+    <h2 class="contact-title">Building something?<br>Let's talk.</h2>
+    <p class="contact-sub">Open to mobile, backend and AI-integration work — reach out on any of these.</p>
+    <div class="contact-links">
+      <a href="mailto:ghusharibnajam12@gmail.com" class="contact-link">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">ghusharibnajam12@gmail.com</span>
+      </a>
+      <a href="tel:+923064728820" class="contact-link">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value">+92 306 4728820</span>
+      </a>
+      <a href="https://github.com/ghusharibdev" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">ghusharibdev ↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ghusharib-najam-3a91531a4/" target="_blank" rel="noopener" class="contact-link">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">ghusharib-najam ↗</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Ghusharib Najam — Lahore, Pakistan</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
