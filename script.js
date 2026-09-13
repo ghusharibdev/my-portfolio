@@ -118,22 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter(Boolean);
 
   const railLinks = Array.from(document.querySelectorAll('.trace-rail a'));
-  const pulse = document.getElementById('tracePulse');
-  const rail = document.querySelector('.trace-rail ul');
-
-  // Position the trace pulse against whichever rail item is active
-  function movePulseTo(index){
-    if (!pulse || !rail || !railLinks[index]) return;
-    const railRect = rail.getBoundingClientRect();
-    const linkRect = railLinks[index].getBoundingClientRect();
-    const offset = linkRect.top - railRect.top + (linkRect.height / 2) - 5;
-    pulse.style.top = `${rail.offsetTop + offset}px`;
-  }
 
   function setActive(id){
     railLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
-    const idx = sections.findIndex(s => s.id === id);
-    if (idx > -1) movePulseTo(idx);
   }
 
   // Highlight the active section as it crosses the viewport midpoint
@@ -147,10 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initial state
   setActive('hero');
-  window.addEventListener('resize', () => {
-    const activeLink = railLinks.find(a => a.classList.contains('active'));
-    if (activeLink) movePulseTo(sections.findIndex(s => s.id === activeLink.dataset.section));
-  });
 
   // Reveal-on-scroll for cards and groups
   const revealTargets = document.querySelectorAll(

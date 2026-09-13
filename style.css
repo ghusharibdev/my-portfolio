@@ -84,15 +84,7 @@ body{
 .trace-line line{ stroke: var(--line-strong); stroke-width: 2; }
 
 .trace-pulse{
-  position:absolute;
-  left: 5px;
-  top: 90px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 12px var(--cyan);
-  transition: top 0.25s ease-out;
+  display: none;
 }
 
 .trace-rail ul{
@@ -123,6 +115,7 @@ body{
 .trace-rail a.active .node,
 .trace-rail a:hover .node{
   border-color: var(--cyan);
+  background: var(--cyan);
 }
 .rail-label{
   font-family: var(--mono);
