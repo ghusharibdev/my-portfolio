@@ -132,6 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(s => sectionObserver.observe(s));
 
+  // Trace rail scroll progress fill
+  const traceFill = document.getElementById('traceFill');
+  function updateTraceFill(){
+    if (!traceFill) return;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    traceFill.style.height = pct + '%';
+  }
+  window.addEventListener('scroll', updateTraceFill, { passive: true });
+  updateTraceFill();
+
   // Initial state
   setActive('hero');
 

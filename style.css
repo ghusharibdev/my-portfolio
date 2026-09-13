@@ -79,9 +79,20 @@ body{
   top: 90px;
   bottom: 90px;
   width: 2px;
-  height: calc(100% - 180px);
+  background: var(--line-strong);
+  border-radius: 1px;
 }
-.trace-line line{ stroke: var(--line-strong); stroke-width: 2; }
+.trace-fill{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:0%;
+  background: var(--cyan);
+  border-radius: 1px;
+  transition: height .15s ease-out;
+  box-shadow: 0 0 8px var(--cyan);
+}
 
 .trace-pulse{
   display: none;

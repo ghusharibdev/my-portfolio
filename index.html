@@ -14,10 +14,7 @@
 
 <!-- Trace rail: vertical schematic line tracking scroll position, doubles as section nav -->
 <nav class="trace-rail" aria-label="Section navigation">
-  <svg class="trace-line" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true">
-    <line x1="1" y1="0" x2="1" y2="100" />
-  </svg>
-  <div class="trace-pulse" id="tracePulse" aria-hidden="true"></div>
+  <div class="trace-line" aria-hidden="true"><div class="trace-fill" id="traceFill"></div></div>
   <ul>
     <li><a href="#hero" data-section="hero"><span class="node"></span><span class="rail-label">start</span></a></li>
     <li><a href="#about" data-section="about"><span class="node"></span><span class="rail-label">about</span></a></li>
