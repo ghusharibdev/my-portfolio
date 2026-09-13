@@ -123,7 +123,6 @@ body{
 .trace-rail a.active .node,
 .trace-rail a:hover .node{
   border-color: var(--cyan);
-  background: var(--cyan);
 }
 .rail-label{
   font-family: var(--mono);
@@ -429,6 +428,7 @@ main > section{
   font-size: 13px;
   color: var(--muted);
   padding-top: 3px;
+  padding-left: 20px;
 }
 .tl-body h4{
   font-size: 18px;
