@@ -165,11 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.getElementById(targetId);
       if (!target) return;
       e.preventDefault();
-      requestAnimationFrame(() => {
+      const afterMenu = () => {
         const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
         const top = target.getBoundingClientRect().top + window.scrollY - topbarHeight + 1;
         window.scrollTo({ top, behavior: 'smooth' });
-      });
+      };
+      if (mobileMenu && mobileMenu.classList.contains('is-open')){
+        setTimeout(afterMenu, 320);
+      } else {
+        afterMenu();
+      }
     });
   });
 
