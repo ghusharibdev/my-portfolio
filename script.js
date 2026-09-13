@@ -11,6 +11,8 @@ const FLOWS = {
   ecommerce:    { stages: ['browse', 'cart', 'checkout'] },
   weather:      { stages: ['location', 'fetch', 'forecast'] },
   urlshortener: { stages: ['long url', 'shorten', 'share'] },
+  climivo:      { stages: ['weather', 'score', ' guidance'] },
+  rxshield:     { stages: ['medication', 'schedule', 'insights'] },
 };
 
 function buildFlow(container){
