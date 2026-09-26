@@ -9,9 +9,7 @@ const FLOWS = {
   jobboard:     { stages: ['profile', 'listing', 'hired'] },
   travel:       { stages: ['search', 'forecast', 'save'] },
   ecommerce:    { stages: ['browse', 'cart', 'checkout'] },
-  weather:      { stages: ['location', 'fetch', 'forecast'] },
-  urlshortener: { stages: ['long url', 'shorten', 'share'] },
-  climivo:      { stages: ['weather', 'score', ' guidance'] },
+  climivo:      { stages: ['weather', 'score', 'guidance'] },
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
   duel:         { stages: ['match', 'answer', 'elo'] },
 };
