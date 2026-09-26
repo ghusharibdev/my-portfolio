@@ -11,7 +11,7 @@ const FLOWS = {
   ecommerce:    { stages: ['browse', 'cart', 'checkout'] },
   climivo:      { stages: ['weather', 'score', 'guidance'] },
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
-  duel:         { stages: ['match', 'answer', 'elo'] },
+  duel:         { stages: ['match', 'answer', 'score'] },
 };
 
 function buildFlow(container){
