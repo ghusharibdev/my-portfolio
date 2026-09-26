@@ -606,20 +606,6 @@ main > section + section{ border-top: 1px solid var(--line); }
   overflow-wrap: anywhere;
 }
 
-/* ---------- footer ---------- */
-.footer{
-  display:flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 28px var(--edge) 40px;
-  color: var(--muted-dim);
-  font-size: 13px;
-  border-top: 1px solid var(--line);
-}
-@media (min-width: 560px){
-  .footer{ flex-direction: row; justify-content: space-between; gap: 0; }
-}
-
 /* ---------- reveal on scroll ---------- */
 .reveal{
   opacity: 0;
