@@ -94,10 +94,6 @@ body{
   box-shadow: 0 0 8px var(--cyan);
 }
 
-.trace-pulse{
-  display: none;
-}
-
 .trace-rail ul{
   position:absolute;
   top: 90px;
@@ -147,10 +143,14 @@ body{
 }
 
 /* ---------- topbar ---------- */
-.topbar{
+/* topbar + mobile menu share one sticky wrapper so an open menu can never
+   slide underneath the topbar's stacking context */
+.site-header{
   position: sticky;
-  top:0;
+  top: 0;
   z-index: 30;
+}
+.topbar{
   display:flex;
   align-items:center;
   justify-content: space-between;
@@ -220,9 +220,6 @@ body{
   background: var(--bg-alt);
   border-bottom: 1px solid var(--line);
   transition: max-height .3s ease;
-  position: sticky;
-  top: 0;
-  z-index: 29;
 }
 @media (min-width: 760px){ .mobile-menu{ display: none; } }
 .mobile-menu.is-open{ max-height: 400px; }
@@ -239,6 +236,7 @@ main > section{
   padding: 56px var(--edge);
   max-width: var(--max);
   margin: 0 auto;
+  scroll-margin-top: 84px;
 }
 @media (min-width: 760px){ main > section{ padding: 96px var(--edge); } }
 .section-eyebrow{
@@ -389,7 +387,6 @@ main > section{
   border-radius: 999px;
   transition: border-color .18s, color .18s;
 }
-.skill-group:hover .chips li{ }
 .chips li:hover{ border-color: var(--cyan); color: var(--cyan); }
 
 /* ---------- experience / timeline ---------- */

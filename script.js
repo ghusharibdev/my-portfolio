@@ -100,15 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
   if (navToggle && mobileMenu){
+    const closeMenu = () => {
+      mobileMenu.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
     navToggle.addEventListener('click', () => {
       const open = mobileMenu.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', String(open));
     });
     mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('is-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')){
+        closeMenu();
+        navToggle.focus();
+      }
     });
   }
 
@@ -120,7 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const traceFill = document.getElementById('traceFill');
 
   function setActive(id){
-    railLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
+    railLinks.forEach(a => {
+      const isActive = a.dataset.section === id;
+      a.classList.toggle('active', isActive);
+      if (isActive) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
     const idx = sections.findIndex(s => s.id === id);
     if (traceFill && idx > -1){
       const pct = railLinks.length > 1 ? (idx / (railLinks.length - 1)) * 100 : 0;
@@ -167,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollToTarget = () => {
         const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
         const top = target.getBoundingClientRect().top + window.scrollY - topbarHeight;
-        window.scrollTo({ top, behavior: 'instant' });
+        window.scrollTo({ top, behavior: 'smooth' });
       };
       if (mobileMenu && mobileMenu.classList.contains('is-open')){
         setTimeout(scrollToTarget, 320);
