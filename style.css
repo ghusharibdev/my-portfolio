@@ -134,9 +134,15 @@ body{
   transform: translateX(-4px);
   transition: opacity .2s, transform .2s;
   white-space: nowrap;
+  /* floats over the content column on narrow desktops, so give it a solid
+     chip and let clicks fall through to whatever sits underneath */
+  background: var(--bg-raise);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  padding: 2px 6px;
+  pointer-events: none;
 }
-.trace-rail a:hover .rail-label,
-.trace-rail a.active .rail-label{
+.trace-rail a:hover .rail-label{
   opacity: 1;
   color: var(--cyan);
   transform: translateX(0);
@@ -230,6 +236,9 @@ body{
   color: var(--muted);
   border-top: 1px solid var(--line);
 }
+@media (max-height: 430px){
+  .mobile-menu a{ padding: 11px var(--edge); font-size: 14px; }
+}
 .mobile-menu a:hover{ color: var(--cyan); }
 
 /* ---------- layout helpers ---------- */
@@ -267,13 +276,16 @@ main > section{
   animation: rise .7s ease forwards;
 }
 .hero-title{
-  font-size: clamp(48px, 9vw, 108px);
+  /* vw term keeps ~48px at 320px while still shrinking on 240-300px screens,
+     where the fixed 48px floor pushed "Ghusharib" past the content edge */
+  font-size: clamp(40px, 8.5vw + 20px, 108px);
   line-height: 0.96;
   font-weight: 700;
   letter-spacing: -0.02em;
   opacity: 0;
   animation: rise .8s ease forwards .1s;
 }
+@media (max-width: 259px){ .hero-title{ font-size: 34px; } }
 .hero-sub{
   max-width: 560px;
   margin-top: 28px;
