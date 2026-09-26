@@ -13,6 +13,7 @@ const FLOWS = {
   urlshortener: { stages: ['long url', 'shorten', 'share'] },
   climivo:      { stages: ['weather', 'score', ' guidance'] },
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
+  duel:         { stages: ['match', 'answer', 'elo'] },
 };
 
 function buildFlow(container){
