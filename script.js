@@ -8,7 +8,6 @@ const FLOWS = {
   spendwise:    { stages: ['expense', 'budget', 'summary'] },
   jobboard:     { stages: ['profile', 'listing', 'hired'] },
   travel:       { stages: ['search', 'forecast', 'save'] },
-  ecommerce:    { stages: ['browse', 'cart', 'checkout'] },
   climivo:      { stages: ['weather', 'score', 'guidance'] },
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
   duel:         { stages: ['match', 'answer', 'score'] },
