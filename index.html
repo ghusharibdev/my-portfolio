@@ -230,10 +230,8 @@
           description to get a match score, a skill-gap analysis, interview talking points and
           questions you are likely to be asked — every answer drawn from your own résumé using
           semantic search. You can also chat with it to ask anything else.</p>
-        <p class="card-note">How it's built — a Flutter (MVVM) app talks to a Node.js service that runs LangChain.js. The
-          résumé is split into chunks, turned into embeddings and stored in Qdrant for semantic
-          search. Groq writes the answers, Supabase holds the structured data and Redis caches
-          repeat queries.</p>
+        <p class="card-note">Flutter client, Node service, LangChain.js, Qdrant vector
+          search, Groq generation.</p>
         <ul class="tag-row">
           <li>Flutter (MVVM)</li><li>Node.js</li><li>LangChain.js</li><li>Qdrant</li><li>Groq</li><li>Firebase</li><li>Supabase</li><li>Redis</li>
         </ul>
