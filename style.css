@@ -201,6 +201,17 @@ body::before{
 @media (min-width: 860px){
   .topnav{ display: flex; gap: 4px; }
 }
+/* From desktop up, pin the nav to the true centre of the bar so it never
+   crowds the monogram. Centring is absolute, so it costs the sides nothing —
+   the mark and the actions simply keep their own space at the edges. */
+@media (min-width: 860px){
+  .topnav{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+}
 .topnav a{
   position: relative;
   font-size: 14.5px;
@@ -406,6 +417,11 @@ body::before{
   opacity: 1;
   transform: translateX(0);
   color: var(--accent);
+}
+/* the column needs ~230px of height plus clearance under the topbar, so drop
+   it in short windows instead of letting it ride up into the header */
+@media (max-height: 480px){
+  .dotnav{ display: none; }
 }
 
 /* ============================================================
