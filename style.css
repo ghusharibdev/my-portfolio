@@ -162,7 +162,47 @@ body::before{
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal{ opacity: 1; transform: none; }
+  /* the .reveal override lives at the foot of this file — it has to come
+     after the .reveal rule it is cancelling, or source order defeats it */
+}
+
+/* ---------- cursor glow ---------- */
+/* one fixed, composited element dragged around by transform — the gradient is
+   rasterised once, so moving it costs a transform and nothing else */
+.cursor-glow{
+  --glow-size: 520px;
+  --glow-alpha: 0.11;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--glow-size);
+  height: var(--glow-size);
+  /* pull back by half so the circle centres on the point, not its corner */
+  margin: calc(var(--glow-size) / -2) 0 0 calc(var(--glow-size) / -2);
+  border-radius: 50%;
+  background: radial-gradient(circle closest-side, var(--accent), transparent 68%);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* parked off-screen until the first pointer move */
+  transform: translate3d(-9999px, -9999px, 0);
+  transition: opacity 0.6s var(--ease-io);
+  will-change: transform;
+}
+.cursor-glow.is-on{ opacity: var(--glow-alpha); }
+
+/* the light palette needs a lighter hand, or it reads as a smudge on white */
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .cursor-glow{ --glow-alpha: 0.07; --glow-size: 560px; }
+}
+:root[data-theme="light"] .cursor-glow{ --glow-alpha: 0.07; --glow-size: 560px; }
+
+/* touch has no cursor to trail, and a tapped glow would just sit there */
+@media (hover: none), (pointer: coarse){
+  .cursor-glow{ display: none; }
+}
+@media (prefers-reduced-motion: reduce){
+  .cursor-glow{ display: none; }
 }
 
 /* ============================================================
@@ -924,3 +964,13 @@ main > section + section{ border-top: 1px solid var(--line); }
   transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
 }
 .reveal.is-visible{ opacity: 1; transform: translateY(0); }
+
+/* Reduced motion: no entrance animation, and nothing left hidden. This has to
+   sit after the .reveal rule above, otherwise the later declaration wins and
+   content is stranded at opacity 0. */
+@media (prefers-reduced-motion: reduce){
+  .reveal{
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

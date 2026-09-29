@@ -97,6 +97,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.flow[data-flow]').forEach(buildFlow);
 
+  /* ---------- cursor glow ---------- */
+  // pointer only: no cursor on touch to trail, and a tapped glow would linger
+  const glow = document.querySelector('.cursor-glow');
+  if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches){
+    let gx = 0;
+    let gy = 0;
+    let glowQueued = false;
+    let glowStarted = false;
+
+    function placeGlow(){
+      glowQueued = false;
+      glow.style.transform = `translate3d(${gx}px, ${gy}px, 0)`;
+    }
+
+    window.addEventListener('pointermove', (e) => {
+      // ignore the synthetic move some pens emit on hover without contact
+      if (e.pointerType === 'touch') return;
+      gx = e.clientX;
+      gy = e.clientY;
+      if (!glowStarted){
+        glowStarted = true;
+        glow.classList.add('is-on');
+        placeGlow();
+      }
+      if (glowQueued) return;
+      glowQueued = true;
+      requestAnimationFrame(placeGlow);
+    }, { passive: true });
+
+    // fade out when the pointer leaves the window entirely
+    document.addEventListener('pointerleave', () => glow.classList.remove('is-on'));
+    window.addEventListener('blur', () => glow.classList.remove('is-on'));
+  }
+
   /* ---------- theme toggle ---------- */
   const root = document.documentElement;
   const themeToggle = document.getElementById('themeToggle');
