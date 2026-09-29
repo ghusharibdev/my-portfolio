@@ -204,11 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // Reveal-on-scroll for cards and groups
-  const revealTargets = document.querySelectorAll(
+  // Array.from, not a raw NodeList: NodeList has forEach but not indexOf
+  const revealTargets = Array.from(document.querySelectorAll(
     '.fact, .skill-group, .tl-item, .feature-card, .work-card, .contact-link'
-  );
+  ));
   revealTargets.forEach(el => el.classList.add('reveal'));
 
+  // threshold 0 so an element reveals the moment it edges in, rather than
+  // needing 12% of its box on screen (which very tall cards can never reach)
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -219,9 +222,36 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
 
   revealTargets.forEach(el => revealObserver.observe(el));
+
+  /* Safety net. A fast flick, a Page Down, or jumping to an anchor can move a
+     card from "below the fold" to "already scrolled past" in a single step, so
+     the observer never sees it intersect and it would stay at opacity 0
+     forever. Anything whose top has reached the viewport gets revealed
+     regardless, which keeps the page fail-safe rather than blank. */
+  let revealSweepQueued = false;
+
+  function sweepReveals(){
+    revealSweepQueued = false;
+    const limit = window.innerHeight || document.documentElement.clientHeight;
+    revealTargets.forEach(el => {
+      if (el.classList.contains('is-visible')) return;
+      if (el.getBoundingClientRect().top < limit) el.classList.add('is-visible');
+    });
+  }
+
+  function queueSweep(){
+    if (revealSweepQueued) return;
+    revealSweepQueued = true;
+    requestAnimationFrame(sweepReveals);
+  }
+
+  window.addEventListener('scroll', queueSweep, { passive: true });
+  window.addEventListener('resize', queueSweep, { passive: true });
+  window.addEventListener('load', queueSweep);
+  queueSweep();
 
   // Smooth-scroll offset correction for the sticky topbar
   document.querySelectorAll('a[href^="#"]').forEach(link => {
