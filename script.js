@@ -11,6 +11,7 @@ const FLOWS = {
   climivo:      { stages: ['weather', 'score', 'guidance'] },
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
   duel:         { stages: ['match', 'answer', 'score'] },
+  aajkarate:    { stages: ['scrape', 'cache', 'notify'] },
 };
 
 function buildFlow(container){
