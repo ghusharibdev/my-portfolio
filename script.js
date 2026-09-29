@@ -97,6 +97,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.flow[data-flow]').forEach(buildFlow);
 
+  /* ---------- theme toggle ---------- */
+  const root = document.documentElement;
+  const themeToggle = document.getElementById('themeToggle');
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // what is actually showing right now, whether pinned or inherited
+  const currentTheme = () => {
+    const pinned = root.getAttribute('data-theme');
+    if (pinned === 'light' || pinned === 'dark') return pinned;
+    return systemDark.matches ? 'dark' : 'light';
+  };
+
+  const syncToggleLabel = () => {
+    if (!themeToggle) return;
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    themeToggle.setAttribute('aria-label', `Switch to ${next} theme`);
+  };
+
+  if (themeToggle){
+    themeToggle.addEventListener('click', () => {
+      const next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
+      syncToggleLabel();
+    });
+    syncToggleLabel();
+  }
+
+  // keeps the button honest when the OS theme flips under an unpinned visitor
+  systemDark.addEventListener('change', syncToggleLabel);
+
   /* ---------- mobile nav ---------- */
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -124,21 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
-  const railLinks = Array.from(document.querySelectorAll('.trace-rail a'));
-  const traceFill = document.getElementById('traceFill');
+  // both the dot nav and the top nav carry data-section, so one pass covers them
+  const navLinks = Array.from(document.querySelectorAll('[data-section]'));
 
   function setActive(id){
-    railLinks.forEach(a => {
+    navLinks.forEach(a => {
       const isActive = a.dataset.section === id;
       a.classList.toggle('active', isActive);
       if (isActive) a.setAttribute('aria-current', 'true');
       else a.removeAttribute('aria-current');
     });
-    const idx = sections.findIndex(s => s.id === id);
-    if (traceFill && idx > -1){
-      const pct = railLinks.length > 1 ? (idx / (railLinks.length - 1)) * 100 : 0;
-      traceFill.style.height = pct + '%';
-    }
   }
 
   // Highlight the active section as it crosses the viewport midpoint
@@ -153,6 +179,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial state
   setActive('hero');
 
+  /* ---------- scroll progress ---------- */
+  // scaleX on a compositor-friendly property, throttled to one write per frame
+  const progressFill = document.getElementById('progressFill');
+  let progressQueued = false;
+
+  function updateProgress(){
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollable > 0 ? Math.min(1, Math.max(0, doc.scrollTop / scrollable)) : 0;
+    if (progressFill) progressFill.style.transform = `scaleX(${pct})`;
+    progressQueued = false;
+  }
+
+  function queueProgress(){
+    if (progressQueued) return;
+    progressQueued = true;
+    requestAnimationFrame(updateProgress);
+  }
+
+  window.addEventListener('scroll', queueProgress, { passive: true });
+  window.addEventListener('resize', queueProgress, { passive: true });
+  updateProgress();
+
+
   // Reveal-on-scroll for cards and groups
   const revealTargets = document.querySelectorAll(
     '.fact, .skill-group, .tl-item, .feature-card, .work-card, .contact-link'
@@ -160,13 +210,16 @@ document.addEventListener('DOMContentLoaded', () => {
   revealTargets.forEach(el => el.classList.add('reveal'));
 
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('is-visible'), (i % 6) * 60);
+        // stagger by the element's own position in the list, so a batch
+        // arriving together cascades instead of all popping at once
+        const i = revealTargets.indexOf(entry.target);
+        setTimeout(() => entry.target.classList.add('is-visible'), Math.min(i, 8) * 55);
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
   revealTargets.forEach(el => revealObserver.observe(el));
 

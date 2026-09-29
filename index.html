@@ -17,38 +17,61 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+/* Apply the saved theme before first paint so returning visitors never get
+   a flash of the wrong colour scheme. */
+(function () {
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'light' || saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+    }
+  } catch (e) { /* private mode — fall back to the system preference */ }
+})();
+</script>
 </head>
 <body>
 
-<!-- Trace rail: vertical schematic line tracking scroll position, doubles as section nav -->
-<nav class="trace-rail" aria-label="Section navigation">
-  <div class="trace-line" aria-hidden="true"><div class="trace-fill" id="traceFill"></div></div>
-  <ul>
-    <li><a href="#hero" data-section="hero"><span class="node"></span><span class="rail-label">top</span></a></li>
-    <li><a href="#about" data-section="about"><span class="node"></span><span class="rail-label">about</span></a></li>
-    <li><a href="#skills" data-section="skills"><span class="node"></span><span class="rail-label">skills</span></a></li>
-    <li><a href="#experience" data-section="experience"><span class="node"></span><span class="rail-label">path</span></a></li>
-    <li><a href="#work" data-section="work"><span class="node"></span><span class="rail-label">work</span></a></li>
-    <li><a href="#contact" data-section="contact"><span class="node"></span><span class="rail-label">connect</span></a></li>
-  </ul>
+<!-- Dot nav: compact section jump, pinned right so it never overlaps body copy -->
+<nav class="dotnav" aria-label="Section navigation">
+  <a href="#hero" data-section="hero" class="dotnav-item"><span class="dotnav-label">top</span><span class="dotnav-dot"></span></a>
+  <a href="#about" data-section="about" class="dotnav-item"><span class="dotnav-label">about</span><span class="dotnav-dot"></span></a>
+  <a href="#skills" data-section="skills" class="dotnav-item"><span class="dotnav-label">skills</span><span class="dotnav-dot"></span></a>
+  <a href="#experience" data-section="experience" class="dotnav-item"><span class="dotnav-label">path</span><span class="dotnav-dot"></span></a>
+  <a href="#work" data-section="work" class="dotnav-item"><span class="dotnav-label">work</span><span class="dotnav-dot"></span></a>
+  <a href="#contact" data-section="contact" class="dotnav-item"><span class="dotnav-label">connect</span><span class="dotnav-dot"></span></a>
 </nav>
 
 <header class="site-header">
   <div class="topbar">
     <a href="#hero" class="mark">{ GN }</a>
     <nav class="topnav" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-section="about">About</a>
+      <a href="#skills" data-section="skills">Skills</a>
+      <a href="#experience" data-section="experience">Experience</a>
+      <a href="#work" data-section="work">Work</a>
+      <a href="#contact" data-section="contact">Contact</a>
     </nav>
-    <a class="topbar-cta" href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="topbar-actions">
+      <a class="topbar-cta" href="https://github.com/ghusharibdev" target="_blank" rel="noopener">GitHub ↗</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.6v2.2M12 19.2v2.2M4.2 12H2M22 12h-2.2M6.3 6.3 4.8 4.8M19.2 19.2l-1.5-1.5M17.7 6.3l1.5-1.5M4.8 19.2l1.5-1.5"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.6A8.6 8.6 0 1 1 9.4 3.5a6.9 6.9 0 0 0 11.1 11.1Z"/>
+        </svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
