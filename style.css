@@ -171,7 +171,7 @@ body::before{
    rasterised once, so moving it costs a transform and nothing else */
 .cursor-glow{
   --glow-size: 520px;
-  --glow-alpha: 0.11;
+  --glow-alpha: 0.065;
   position: fixed;
   top: 0;
   left: 0;
@@ -193,9 +193,9 @@ body::before{
 
 /* the light palette needs a lighter hand, or it reads as a smudge on white */
 @media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]) .cursor-glow{ --glow-alpha: 0.07; --glow-size: 560px; }
+  :root:not([data-theme="dark"]) .cursor-glow{ --glow-alpha: 0.04; --glow-size: 560px; }
 }
-:root[data-theme="light"] .cursor-glow{ --glow-alpha: 0.07; --glow-size: 560px; }
+:root[data-theme="light"] .cursor-glow{ --glow-alpha: 0.04; --glow-size: 560px; }
 
 /* touch has no cursor to trail, and a tapped glow would just sit there */
 @media (hover: none), (pointer: coarse){
