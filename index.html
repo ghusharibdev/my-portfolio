@@ -279,6 +279,24 @@
       </article>
 
       <article class="feature-card">
+        <div class="feature-tag">backend · microservices</div>
+        <h3>Patient Management System</h3>
+        <div class="flow" data-flow="patientmgmt" aria-hidden="true"></div>
+        <p>A hospital backend split into five independent Spring Boot services — patients,
+          appointments, auth, notifications and billing — that talk over REST, gRPC and Kafka.
+          Booking an appointment validates the patient through patient-service, a billing account
+          is opened automatically from a Kafka event, and a notification service stores every
+          domain event it receives. The whole stack — services, Postgres and the message broker —
+          comes up together with Docker Compose.</p>
+        <p class="card-note">Controller → service → repository → mapper across every service,
+          Springdoc/OpenAPI docs and ready-made .http request files.</p>
+        <ul class="tag-row">
+          <li>Java</li><li>Spring Boot</li><li>gRPC</li><li>Kafka</li><li>JWT</li><li>Docker</li><li>PostgreSQL</li>
+        </ul>
+        <a href="https://github.com/ghusharibdev/Patient-Management-System" target="_blank" rel="noopener" class="feature-link">View on GitHub ↗</a>
+      </article>
+
+      <article class="feature-card">
         <div class="feature-tag">offline-first · rates</div>
         <h3>Aaj Ka Rate</h3>
         <div class="flow" data-flow="aajkarate" aria-hidden="true"></div>
@@ -323,21 +341,6 @@
     </div>
 
     <div class="work-grid">
-
-      <article class="work-card">
-        <h4>Patient Management System</h4>
-        <div class="flow flow--small" data-flow="patientmgmt" aria-hidden="true"></div>
-        <p>A hospital backend split into five independent Spring Boot services — patients,
-          appointments, auth, notifications and billing — that talk over REST, gRPC and Kafka.
-          Booking an appointment validates the patient through patient-service, a billing account
-          is opened automatically from a Kafka event, and a notification service stores every
-          domain event. The whole stack — services, Postgres and the message broker — comes up
-          together with Docker Compose.</p>
-        <ul class="tag-row tag-row--small">
-          <li>Java</li><li>Spring Boot</li><li>gRPC</li><li>Kafka</li><li>JWT</li><li>Docker</li><li>PostgreSQL</li>
-        </ul>
-        <a href="https://github.com/ghusharibdev/Patient-Management-System" target="_blank" rel="noopener">GitHub ↗</a>
-      </article>
 
       <article class="work-card">
         <h4>SubsEntry</h4>
