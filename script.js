@@ -12,7 +12,7 @@ const FLOWS = {
   rxshield:     { stages: ['medication', 'schedule', 'insights'] },
   duel:         { stages: ['match', 'answer', 'score'] },
   aajkarate:    { stages: ['scrape', 'cache', 'notify'] },
-  patientmgmt:  { stages: ['admit', 'record', 'billing'] },
+  patientmgmt:  { stages: ['patient', 'kafka', 'billing'] },
 };
 
 function buildFlow(container){

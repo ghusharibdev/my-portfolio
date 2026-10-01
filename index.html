@@ -327,12 +327,14 @@
       <article class="work-card">
         <h4>Patient Management System</h4>
         <div class="flow flow--small" data-flow="patientmgmt" aria-hidden="true"></div>
-        <p>A hospital backend split into independent microservices. Patient records and billing run as
-          separate Spring Boot services that talk over gRPC, with every state change published to
-          Kafka so the two stay in sync without a shared database. The whole stack — services,
-          Postgres and the message broker — comes up together with Docker Compose.</p>
+        <p>A hospital backend split into five independent Spring Boot services — patients,
+          appointments, auth, notifications and billing — that talk over REST, gRPC and Kafka.
+          Booking an appointment validates the patient through patient-service, a billing account
+          is opened automatically from a Kafka event, and a notification service stores every
+          domain event. The whole stack — services, Postgres and the message broker — comes up
+          together with Docker Compose.</p>
         <ul class="tag-row tag-row--small">
-          <li>Java</li><li>Spring Boot</li><li>gRPC</li><li>Kafka</li><li>Docker</li><li>PostgreSQL</li>
+          <li>Java</li><li>Spring Boot</li><li>gRPC</li><li>Kafka</li><li>JWT</li><li>Docker</li><li>PostgreSQL</li>
         </ul>
         <a href="https://github.com/ghusharibdev/Patient-Management-System" target="_blank" rel="noopener">GitHub ↗</a>
       </article>
