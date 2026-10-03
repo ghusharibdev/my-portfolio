@@ -36,7 +36,11 @@
 
   --max: 1160px;
   --edge: clamp(20px, 5vw, 72px);
-  --topbar-h: 62px;
+  /* Sticky bar height. The bar is a single flex row with a fixed 10px padding
+     and does not reflow, so 65px holds from 320px to 1920px; script.js still
+     measures it and overwrites this, which keeps the value honest if the bar
+     ever gains a second row. It only has to be right as the no-JS fallback. */
+  --topbar-h: 65px;
 
   --r-sm: 8px;
   --r-md: 12px;
@@ -105,6 +109,12 @@ html{
   /* clip (not hidden) so position:sticky keeps working */
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
+  /* Inset the scrollport by the sticky bar so a native anchor jump — keyboard,
+     find-in-page, or no JS at all — lands under the bar rather than behind it.
+     Lives here, not on the sections, so it is one offset and not two stacked
+     ones. script.js keeps --topbar-h equal to the bar's real height, which is
+     what keeps it honest when the bar reflows across breakpoints. */
+  scroll-padding-top: var(--topbar-h);
 }
 
 body{
@@ -471,11 +481,15 @@ main > section{
   padding: 64px var(--edge);
   max-width: var(--max);
   margin: 0 auto;
-  scroll-margin-top: var(--topbar-h);
 }
 @media (min-width: 760px){
   main > section{ padding: 104px var(--edge); }
 }
+/* Sections are the focus target after an anchor jump, so they need to be
+   programmatically focusable without joining the tab order. Suppress the ring
+   unless the visitor is actually driving with the keyboard. */
+main > section:focus{ outline: none; }
+main > section:focus-visible{ outline: 2px solid var(--accent); outline-offset: -6px; }
 main > section + section{ border-top: 1px solid var(--line); }
 
 .section-eyebrow{

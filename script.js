@@ -287,24 +287,91 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', queueSweep);
   queueSweep();
 
-  // Smooth-scroll offset correction for the sticky topbar
+  /* ---------- anchor scrolling ---------- */
+  /* The bar is sticky, so a bare jump to a section parks its heading underneath
+     the bar. Offset by the bar's live height, then re-aim after the scroll
+     settles: web fonts swap in and the generated .flow diagrams are injected
+     after first paint, both of which move the target out from under a one-shot
+     measurement. The CSS scroll-padding-top on <html> covers native jumps. */
+  const doc = document.documentElement;
+  const topbar = document.querySelector('.topbar');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* Keep --topbar-h equal to the bar's real height. It feeds scroll-padding-top,
+     so this is what keeps anchor offsets correct when the bar reflows across
+     breakpoints instead of trusting one hard-coded pixel value. */
+  let headerQueued = false;
+  function syncHeaderHeight(){
+    headerQueued = false;
+    if (!topbar) return;
+    const h = Math.round(topbar.getBoundingClientRect().height);
+    if (h > 0) doc.style.setProperty('--topbar-h', h + 'px');
+  }
+  function queueHeaderHeight(){
+    if (headerQueued) return;
+    headerQueued = true;
+    requestAnimationFrame(syncHeaderHeight);
+  }
+  window.addEventListener('resize', queueHeaderHeight);
+  window.addEventListener('load', queueHeaderHeight);
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(queueHeaderHeight).catch(() => {});
+  }
+  queueHeaderHeight();
+
+  /* Measured off the bar's bottom edge rather than its height, so it stays
+     correct whether the bar is stuck to the top or still up in the flow. */
+  function barOffset(){
+    return topbar ? Math.max(0, Math.round(topbar.getBoundingClientRect().bottom)) : 0;
+  }
+
+  /* Clamp into the scrollable range: a section near the end of the document
+     cannot be pinned to the top of the viewport, and asking for it anyway is
+     what leaves you stranded halfway. */
+  function targetTop(target){
+    const max = doc.scrollHeight - doc.clientHeight;
+    const raw = target.getBoundingClientRect().top + window.scrollY - barOffset();
+    return Math.max(0, max > 0 ? Math.min(raw, max) : raw);
+  }
+
+  /* The mobile menu closes in its own click handler, which runs before this
+     one, so by the time we get here the .is-open class is already gone. Ask the
+     animated property instead: max-height runs 420px -> 0, so it stays above
+     zero for the whole collapse and is exactly 0 once the menu is shut. */
+  function menuCollapsing(){
+    if (!mobileMenu) return false;
+    return parseFloat(getComputedStyle(mobileMenu).maxHeight) > 0;
+  }
+
+  function jumpTo(target, delay = 0){
+    const behavior = reduceMotion.matches ? 'auto' : 'smooth';
+    const go = () => {
+      window.scrollTo({ top: targetTop(target), behavior });
+      queueProgress();
+    };
+    if (delay > 0) setTimeout(go, delay);
+    else go();
+    // Correction passes for late layout shifts and for a target too tall to fit
+    // the viewport. Both are no-ops once the position is already right, so a
+    // correct first pass costs nothing.
+    setTimeout(go, delay + 260);
+    setTimeout(go, delay + 760);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href').slice(1);
-      const target = document.getElementById(targetId);
+      const id = link.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
       if (!target) return;
       e.preventDefault();
-      const scrollToTarget = () => {
-        const topbarHeight = document.querySelector('.topbar')?.offsetHeight || 0;
-        const top = target.getBoundingClientRect().top + window.scrollY - topbarHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
-      };
-      if (mobileMenu && mobileMenu.classList.contains('is-open')){
-        setTimeout(scrollToTarget, 320);
-      } else {
-        scrollToTarget();
-      }
+      /* replaceState, not pushState: keep the hash shareable without pushing a
+         history entry, which would send Back somewhere this handler does not
+         restore. Throws on some file:// origins, hence the guard. */
+      try { history.replaceState(null, '', '#' + id); } catch (err) { /* local file */ }
+      target.focus({ preventScroll: true });
+      // let the mobile menu finish collapsing before the height is measured
+      jumpTo(target, menuCollapsing() ? 340 : 0);
     });
   });
-
 });
