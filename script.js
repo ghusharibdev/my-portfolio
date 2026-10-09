@@ -13,6 +13,7 @@ const FLOWS = {
   duel:         { stages: ['match', 'answer', 'score'] },
   aajkarate:    { stages: ['scrape', 'cache', 'notify'] },
   patientmgmt:  { stages: ['patient', 'kafka', 'billing'] },
+  nova:         { stages: ['transcript', 'gemini', 'project'] },
 };
 
 function buildFlow(container){
