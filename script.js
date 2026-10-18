@@ -14,6 +14,8 @@ const FLOWS = {
   aajkarate:    { stages: ['scrape', 'cache', 'notify'] },
   patientmgmt:  { stages: ['patient', 'kafka', 'billing'] },
   nova:         { stages: ['transcript', 'gemini', 'project'] },
+  intelliclaim: { stages: ['damage', 'ai assess', 'claim'] },
+  department:   { stages: ['push', 'build', 'deploy'] },
 };
 
 function buildFlow(container){
